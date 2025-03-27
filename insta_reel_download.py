@@ -56,6 +56,25 @@ def login(username: str, password: str,page,context):
 
 
 
+def login_with_browser(username: str, password: str):
+    with sync_playwright() as p:  # Ensure Playwright starts here
+        # browser = p.chromium.launch(headless=False)  # Change to True if needed
+        browser = p.chromium.launch(headless=True)  # Change to True if needed
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto("https://www.instagram.com/accounts/login/", timeout=60000)
+        time.sleep(4)  # Allow time for the page to load
+
+        page.fill("input[name='username']", username)
+        page.fill("input[name='password']", password)
+        page.press("input[name='password']", "Enter")
+
+        time.sleep(5.5)
+        page.screenshot(path=crediantials.screenshot_path)
+        is_logged_in(page)
+        browser.close()
+
+
 
 
 
@@ -111,6 +130,7 @@ def save_links_to_json(links, filename="instagram_links.json"):
 if __name__ == "__main__":
     username = crediantials.USER  # Change this to your Instagram username
     password = crediantials.PWD  # Change this to your Instagram password
+    login_with_browser(username,password)
     target_username = "tamannaahspeaks"  # Change this to the target username
     post_links = get_instagram_links(username, password, target_username, 3)
     save_links_to_json(post_links)
