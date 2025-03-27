@@ -61,7 +61,8 @@ def login(username: str, password: str,page,context):
 
 def get_instagram_links(username: str, password: str, target_username: str,max_scrolls, max_attempts_without_new_links: int = 3):
     with sync_playwright() as p:  # Ensure Playwright starts here
-        browser = p.chromium.launch(headless=False)  # Change to True if needed
+        # browser = p.chromium.launch(headless=False)  # Change to True if needed
+        browser = p.chromium.launch(headless=True)  # Change to True if needed
         context = browser.new_context()
         page = context.new_page()
         load_cookies(context)
