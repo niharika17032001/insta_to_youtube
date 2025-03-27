@@ -29,7 +29,7 @@ jobs:
 
         run: |
           mkdir -p reports
-          python insta_reel_download.py
+          python download_reel.py
           chmod 777  /home/runner/work/insta_to_youtube/insta_to_youtube/reports/
 
       - name: Set output

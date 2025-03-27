@@ -1,7 +1,9 @@
 import yt_dlp
 
+import crediantials
 
-def download_instagram_reel(url, output_path="downloads/%(title)s.%(ext)s"):
+
+def download_instagram_reel(url, output_path=f"{crediantials.video_path}/%(title)s.%(ext)s"):
     ydl_opts = {
         'outtmpl': output_path,
         'format': 'best',
