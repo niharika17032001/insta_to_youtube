@@ -20,10 +20,13 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Pytest with Chrome
+        env:
+          USER: ${{ secrets.USER }}
+          YOUTUBE_PWD: ${{ secrets.YOUTUBE_PWD }}
 
         run: |
           mkdir -p reports
-          python download_reel.py
+          python insta_reel_download.py
           chmod 777  /home/runner/work/insta_to_youtube/insta_to_youtube/reports/
 
       - name: Set output
