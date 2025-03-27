@@ -71,6 +71,8 @@ def login_with_browser(username: str, password: str):
 
         time.sleep(5.5)
         page.screenshot(path=crediantials.screenshot_path)
+        with open(crediantials.page_content_path, "w", encoding="utf-8") as f:
+            f.write(page.content())
         is_logged_in(page)
         browser.close()
 
